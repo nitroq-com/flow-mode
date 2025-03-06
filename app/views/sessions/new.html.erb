@@ -1,11 +1,39 @@
-<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
-<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+<div class="p-8 max-w-md">
+  <h2 class="text-2xl font-bold text-center mb-6">Sign In</h2>
 
-<%= form_with url: session_path do |form| %>
-  <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %><br>
-  <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72 %><br>
-  <%= form.submit "Sign in" %>
-<% end %>
-<br>
+  <%= tag.div flash[:alert], class: "text-red-600 mb-4 text-center", role: "alert" if flash[:alert] %>
+  <%= tag.div flash[:notice], class: "text-green-600 mb-4 text-center", role: "notice" if flash[:notice] %>
 
-<%= link_to "Forgot password?", new_password_path %>
+  <%= form_with url: session_path, method: :post do |form| %>
+    <div class="mb-4">
+      <%= form.label :email_address, "Email", class: "block text-sm font-medium text-gray-700" %>
+      <%=
+        form.email_field :email_address,
+          required: true,
+          autofocus: true,
+          autocomplete: "username",
+          placeholder: "Enter your email address",
+          value: params[:email_address],
+          class: "mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+      %>
+    </div>
+
+    <div class="mb-6">
+      <%= form.label :password, "Password", class: "block text-sm font-medium text-gray-700" %>
+      <%=
+        form.password_field :password,
+          required: true,
+          autocomplete: "current-password",
+          placeholder: "Enter your password",
+          maxlength: 72,
+          class: "mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+      %>
+    </div>
+
+    <%= form.submit "Sign In", class: "w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700" %>
+
+    <div class="mt-4 text-center">
+      <%= link_to "Forgot password?", new_password_path, class: "text-sm text-blue-600 hover:underline" %>
+    </div>
+  <% end %>
+</div>
