@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_07_173005) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_07_173700) do
   create_table "sessions", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "ip_address"
@@ -34,6 +34,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_07_173005) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "study_sessions", force: :cascade do |t|
+    t.integer "study_material_id", null: false
+    t.text "summary"
+    t.integer "pages_completed", default: 0, null: false
+    t.integer "time_spent", default: 0, null: false
+    t.boolean "completed", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["study_material_id"], name: "index_study_sessions_on_study_material_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email_address", null: false
     t.string "password_digest", null: false
@@ -43,4 +54,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_07_173005) do
   end
 
   add_foreign_key "sessions", "users"
+  add_foreign_key "study_sessions", "study_materials"
 end
