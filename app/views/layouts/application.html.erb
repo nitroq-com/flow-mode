@@ -23,6 +23,18 @@
   </head>
 
   <body class="bg-white dark:bg-black">
+    <header class="bg-zinc-950 pl-2">
+      <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+        <div class="text-xl font-semibold text-gray-600">
+          Flow Mode
+        </div>
+
+        <div>
+          <%= button_to "Log out", session_path, method: :delete, class: "bg-red-900 hover:bg-red-950 text-white px-4 py-2 rounded-md transition-colors duration-300" if authenticated? %>
+        </div>
+      </div>
+    </header>
+
     <main class= "text-gray-200 container mx-auto flex">
       <%= yield %>
     </main>
