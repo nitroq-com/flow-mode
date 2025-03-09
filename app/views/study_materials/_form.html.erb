@@ -1,0 +1,30 @@
+<%= form_with(model: @study_material, local: true, class: "space-y-6 bg-black p-6 rounded-lg") do |form| %>
+  <div class="flex-col">
+    <%= form.label :subject, class: "text-sm font-medium text-white" %>
+    <%= form.text_field :subject, class: "mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-white bg-gray-900" %>
+  </div>
+
+  <div class="flex-col">
+    <%= form.label :material_type, class: "text-sm font-medium text-white" %>
+    <%= form.text_field :material_type, class: "mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-white bg-gray-900" %>
+  </div>
+
+  <div class="flex-col">
+    <%= form.label :description, class: "text-sm font-medium text-white" %>
+    <%= form.text_area :description, rows: 4, class: "mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-white bg-gray-900" %>
+  </div>
+
+  <div class="flex-col">
+    <%= form.label :total_pages, class: "text-sm font-medium text-white" %>
+    <%= form.number_field :total_pages, class: "mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-white bg-gray-900" %>
+  </div>
+
+  <div class="flex-col">
+    <%= form.label :resource_link, class: "text-sm font-medium text-white" %>
+    <%= form.url_field :resource_link, class: "mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-white bg-gray-900" %>
+  </div>
+
+  <div class="flex justify-end">
+    <%= form.submit "Save", class: "px-4 py-2 bg-indigo-600 text-white text-lg font-medium rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
+  </div>
+<% end %>
