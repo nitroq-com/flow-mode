@@ -1,5 +1,5 @@
-<div class="p-8 max-w-md">
-  <h2 class="text-2xl font-bold text-center mb-6">Sign In</h2>
+<div class="p-8 max-w-md border border-indigo-950 mt-12">
+  <h2 class="text-indigo-300 text-2xl font-bold text-center mb-6">Sign In</h2>
 
   <%= tag.div flash[:alert], class: "text-red-600 mb-4 text-center", role: "alert" if flash[:alert] %>
   <%= tag.div flash[:notice], class: "text-green-600 mb-4 text-center", role: "notice" if flash[:notice] %>
@@ -14,7 +14,7 @@
           autocomplete: "username",
           placeholder: "Enter your email address",
           value: params[:email_address],
-          class: "mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          class: "mt-1 w-full px-3 py-2 border border-indigo-950 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
       %>
     </div>
 
@@ -26,10 +26,10 @@
           autocomplete: "current-password",
           placeholder: "Enter your password",
           maxlength: 72,
-          class: "mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          class: "mt-1 w-full px-3 py-2 border border-indigo-950 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
       %>
     </div>
 
-    <%= form.submit "Sign In", class: "w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700" %>
+    <%= form.submit "Sign In", class: "w-full bg-indigo-800 text-white py-2 rounded-md hover:bg-indigo-700 cursor-pointer" %>
   <% end %>
 </div>
