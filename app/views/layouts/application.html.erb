@@ -25,11 +25,13 @@
   </head>
 
   <body class="bg-white dark:bg-black">
-    <header class="bg-gray-950 pl-2">
-      <div class="container mx-auto px-4 py-2 flex justify-between items-center">
-        <a href="/" class="text-xl font-semibold text-gray-600 hover:text-indigo-800"> FlowMode </a>
+    <header class="border-b-1 border-indigo-900 py-3">
+      <div class="container mx-auto px-4 flex justify-between items-center">
+        <a href="/" class="text-xl text-indigo-600 hover:text-indigo-800"> FlowMode </a>
         <div>
-          <%= button_to "Log out", session_path, method: :delete, class: "bg-red-900 hover:bg-red-950 text-white px-4 py-2 rounded-md transition-colors duration-300" if authenticated? %>
+          <%= button_to session_path, method: :delete, class: "text-indigo-600 hover:text-indigo-800 cursor-pointer" do %>
+            <i class="fas fa-sign-out-alt" title="Log out"></i>
+          <% end %>
         </div>
       </div>
     </header>
