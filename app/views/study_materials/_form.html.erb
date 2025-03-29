@@ -1,4 +1,8 @@
-<%= form_with(model: @study_material, local: true, class: "space-y-6 bg-black p-6 rounded-lg") do |form| %>
+<%= form_with model: study_material,
+              url: study_material.persisted? ? study_material_path(study_material) : study_materials_path,
+              method: study_material.persisted? ? :patch : :post,
+              data: { turbo_frame: "study_material_modal", action: "turbo:submit-end->study-material#close" },
+              class: "space-y-6 bg-black p-6 rounded-lg" do |form| %>
   <div class="flex-col">
     <%= form.label :subject, class: "text-sm font-medium text-white" %>
     <%= form.text_field :subject, class: "mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-white bg-gray-900" %>
@@ -24,7 +28,11 @@
     <%= form.url_field :resource_link, class: "mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-white bg-gray-900" %>
   </div>
 
-  <div class="flex justify-end">
-    <%= form.submit "Save", class: "px-4 py-2 bg-indigo-600 text-white text-lg font-medium rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
+  <div class="flex justify-end space-x-3">
+    <button class="px-3 py-2 bg-indigo-900 text-white text-base font-medium rounded-md hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" type="button" data-action="click->study-material#close">
+      Close
+    </button>
+
+    <%= form.submit study_material.persisted? ? "Update" : "Save", class: "px-3 py-2 bg-indigo-600 text-white text-base font-medium rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
   </div>
 <% end %>

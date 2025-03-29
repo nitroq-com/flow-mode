@@ -1,46 +1,16 @@
-<section data-controller="home">
-  <div class="m-2">
-    <%= link_to(new_study_material_path, class: "bg-indigo-900 hover:bg-indigo-800 text-white py-2 px-4 rounded inline-block") do %>
-      <i class="fas fa-plus-circle" title="add study material"></i> Add Material
-    <% end %>
+<turbo-frame id="study_materials_content">
+  <%= render partial: "index", locals: { study_materials: @study_materials, study_material: @study_material } %>
+</turbo-frame>
+
+<div data-study-material-target="modal" class="hidden fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
+  <div class="bg-black p-6 rounded-lg w-5/6 max-h-[90vh] overflow-y-auto border border-indigo-900">
+
+    <turbo-frame id="study_material_modal">
+      <%= render "form", study_material: @study_material %>
+    </turbo-frame>
+
+    <button class="mt-4 bg-indigo-900 hover:bg-indigo-800 text-white px-4 py-2 rounded" data-action="click->study-material#close">
+      Close
+    </button>
   </div>
-
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4">
-    <% @study_materials.each do |material| %>
-      <div class="bg-gray-950 rounded-lg overflow-hidden border border-indigo-900">
-
-      <div class="mt-2 mr-2 font-md text-right">
-        <%= link_to(edit_study_material_path(material.id), class: "text-indigo-600 hover:text-indigo-800") do %>
-          <i class="fas fa-pencil-square" title="edit"></i>
-        <% end %>
-
-        <%= button_to(material, method: :delete, class: "text-indigo-600 hover:text-indigo-800 cursor-pointer inline-block", form_class: "inline-block", data: { turbo_confirm: "Are you sure?" }) do %>
-          <i class="fas fa-trash" title="delete"></i>
-        <% end %>
-      </div>
-
-        <div class="pt-1 p-6">
-          <h2 class="text-xl font-semibold text-white">
-            <% if material.completed? %>
-              <i class="text-indigo-500 fas fa-check-circle" title="delete"></i>
-            <% end %>
-            <%= material.subject %>
-          </h2>
-
-          <p class="text-sm text-gray-500 mb-4">
-            (<%= material.material_type.capitalize %>)
-          </p>
-
-          <p class="text-gray-400">
-            <%= material.description %>
-          </p>
-
-          <div class="mt-4 text-sm text-gray-400">
-            <p><strong>Total Pages:</strong> <%= material.total_pages || "N/A" %></p>
-            <p><strong>Pages Read:</strong> <%= material.pages_read || "0" %></p>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</section>
+</div>

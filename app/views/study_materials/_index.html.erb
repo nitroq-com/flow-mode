@@ -1,0 +1,55 @@
+<div data-controller="study-material">
+  <section>
+    <div class="m-2">
+      <button class="bg-indigo-900 hover:bg-indigo-800 text-white py-2 px-4 rounded" data-action="click->study-material#open" data-turbo-frame="study_material_modal">
+        <i class="fas fa-plus-circle" title="Add Study Material"></i> Add Material
+      </button>
+    </div>
+
+    <div id="study_materials_list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4">
+      <% study_materials.each do |material| %>
+        <div id="<%= dom_id(material) %>" class="bg-gray-950 rounded-lg overflow-hidden border border-indigo-900">
+          <div class="mt-2 mr-2 font-md text-right">
+            <%= link_to edit_study_material_path(material.id), data: { turbo_frame: "study_material_modal", action: "click->study-material#open" }, class: "text-indigo-600 hover:text-indigo-800" do %>
+              <i class="fas fa-pencil-square" title="edit"></i>
+            <% end %>
+
+            <%= button_to(material, method: :delete, class: "text-indigo-600 hover:text-indigo-800 cursor-pointer inline-block", form_class: "inline-block", data: { turbo_confirm: "Are you sure?" }) do %>
+              <i class="fas fa-trash" title="delete"></i>
+            <% end %>
+          </div>
+
+          <div class="pt-1 p-6">
+            <h2 class="text-xl font-semibold text-white">
+              <% if material.completed? %>
+                <i class="text-indigo-500 fas fa-check-circle" title="completed"></i>
+              <% end %>
+              <%= material.subject %>
+            </h2>
+
+            <p class="text-sm text-gray-500 mb-4">
+              (<%= material.material_type.capitalize %>)
+            </p>
+
+            <p class="text-gray-400">
+              <%= material.description %>
+            </p>
+
+            <div class="mt-4 text-sm text-gray-400">
+              <p><strong>Total Pages:</strong> <%= material.total_pages || "N/A" %></p>
+              <p><strong>Pages Read:</strong> <%= material.pages_read || "0" %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+<div data-study-material-target="modal" class="hidden fixed inset-0 flex items-center justify-center" style="background-color: rgba(0, 0, 0, 0.9);">
+    <div class="bg-black p-6 rounded-lg w-5/6 max-h-[90vh] overflow-y-auto border border-indigo-900">
+      <turbo-frame id="study_material_modal">
+        <%= render "form", study_material: study_material %>
+      </turbo-frame>
+    </div>
+  </div>
+</div>
